@@ -1,0 +1,16 @@
+---
+title: "RevealJS Testing"
+listing:
+  contents: 
+    - "posts"
+    - "!slide-dir/"
+  sort: "date desc"
+  type: table
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
+
+

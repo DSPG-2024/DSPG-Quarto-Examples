@@ -1,0 +1,124 @@
+---
+author: 'Harun Celik'
+title: 'Embedding Presentations'
+subtitle: 'Embedding RevealJS Slides into a Quarto Blog'
+date: '07-23-2024'
+toc: true
+---
+
+# Sneak Peek
+
+Here is what we are trying to achieve.
+
+```{=html}
+<iframe 
+    id='slides' 
+    class='slide-deck'
+    src='slide-dir/reveal-slide.html' 
+    >
+</iframe>
+```
+
+# Directory Structure
+
+To do this you will need to have the following files. 
+
+* The first is your main blog post, a `qmd` file such as this one. 
+* Another `qmd` file which will generate the revealjs presentation. 
+    - It's best to keep this one nested in a directory inside the blog post you want to embed into.
+
+Here is the directory structure for this particular blog post.
+
+```bash
+embed-rjs # Main Post Folder
+├── main-blog.qmd # The Blog You Want the Presentation in
+└── slide-dir # Presentation Folder
+    └── reveal-slide.qmd # RevealJS Presentation Made in Quarto Markdown
+```
+
+# Embedding into the Blog
+
+Once the presentation is ready, the following code can be used to embed the presentation.
+
+```html
+<!-- `id` allows css styling -->
+<!-- 'class=slide-deck' is a default parameter that needs to be added-->
+<!-- the src attribute is the path to the qmd file but referred in html-->
+<iframe 
+    id='slides' 
+    class='slide-deck'
+    src='slide-dir/reveal-slide.html' 
+    >
+</iframe>
+```
+
+# Presentation Styling
+
+In the main `styles.css` of the blog project, add the following styling. This will make sure that all slides with the `id=slides` has these sizing properties.
+
+```css
+iframe#slides {
+    width: 100%;
+    height: 350px;
+}
+```
+
+Global presentation properties should be set here. Otherwise they can be put in another `css` file in the directory of the presentation and referenced by the presentation.
+
+For example;
+
+```bash
+embed-rjs 
+├── main-blog.qmd 
+└── slide-dir # Presentation Folder
+    └── reveal-slide.qmd 
+    └── presentation.css # Specific styling to reveal-slide.qmd 
+```
+
+The `YAML` of `reveal-slide.qmd` now should include a `css` option. 
+```yaml
+title: "Look! A Presentation"
+subtitle: "This is Embedded into A Blog Post"
+format: 
+    revealjs:
+        css: presentation.css
+
+```
+
+# Ignoring Presentations as Individual Blog Posts
+
+Without telling Quarto to ignore the contents of the presentation slide explicitly, it will consider the presentation as a separate blog post. The `listings` option of the blog configuration file (called `index.qmd` by default)
+
+```bash
+DSPG-Quarto-Examples
+├── .gitignore
+├── README.md
+├── _quarto.yml
+├── about.qmd
+├── index.qmd # BLOG CONFIGURATION FILE.
+├── posts
+│   ├── _metadata.yml
+│   └── embed-rjs
+│       ├── main-blog.qmd
+│       └── slide-dir
+│           └── reveal-slide.qmd
+├── profile.jpg
+└── styles.css
+```
+
+The contents of the file should be.
+
+```yaml
+title: "RevealJS Testing"
+listing:
+  contents: 
+    - "posts" # This renders everything in the posts directory
+    - "!slide-dir/" # This ignores every directory called 'slide-dir'
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+```

@@ -1,0 +1,19 @@
+---
+title: "Look! A Presentation"
+subtitle: "This is Embedded into A Blog Post"
+format: 'revealjs'
+---
+
+# Introduction
+
+This is a presentation focusing on;
+
+* How to Embed
+* Presentations
+* Into Quarto Blogs
+
+# Steps
+
+1. Try this
+2. Then this
+3. But don't forget this
