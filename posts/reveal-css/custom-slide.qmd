@@ -1,0 +1,62 @@
+---
+title: "Custom CSS Styling"
+author: "Harun Celik"
+date: "07-25-2024"
+subtitle: "How to Customized Individual Items"
+format: 'revealjs'
+css: 'styles.css'
+---
+
+# Introduction
+
+This is a presentation focusing on;
+
+* How to Get
+* Some Kind of Custom
+* CSS Thing Going
+
+# Steps
+
+Here is some text that we really want to highlight.
+We can do it thanks to our ability to give pandoc items
+HTML classes. We will call our class `our_text`.
+
+# Giving Classes
+In Markdown, wrap our text in something like this.
+
+```markdown
+::: {.our_text}
+Here is some text that we really want to highlight.
+We can do it thanks to our ability to give pandoc items
+HTML classes. We will call our class `our_text`.
+:::
+
+```
+# Define CSS
+Link a css file with an argument like this and...
+
+```css
+.our_text {
+  background-color: yellow;
+}
+```
+
+# Text Has Color!
+
+::: {.our_text}
+Here is some text that we really want to highlight.
+We can do it thanks to our ability to give pandoc items
+HTML classes. We will call our class `our_text`.
+:::
+
+# Link CSS in YAML
+Don't forget to link a css in YAML.
+
+```YAML
+---
+title: "Look! A Custom Presentation"
+subtitle: "How to Customized Individual Items"
+format: 'revealjs'
+css: 'styles.css'
+---
+```
